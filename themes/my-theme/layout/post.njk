@@ -30,7 +30,7 @@
 		<div class=tag_list>
 			{% for category in page.categories.toArray() %}
 				<a class="link--reset tag"
-				href="{{ url_for('/categories/#' + post.category) }}">
+				href="{{ url_for('/categories/#' + category.slug) }}">
 					{{ category.name }}
 				</a>
 			{% endfor %}

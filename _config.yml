@@ -71,7 +71,7 @@ theme: my-theme
 deploy:
   type: git
   repo: git@github.com:arush0311/arush0311.github.io.git
-  branch: gh-pages
+  branch: master
 
 node_sass:
   outputStyle: nested
