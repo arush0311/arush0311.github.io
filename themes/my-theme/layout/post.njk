@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% include 'includes/head.njk' %}
+</head>
+<body>
+    <div class="container">
+		{% include 'includes/appbar.njk' %}
+
+		<div class="post_container">
+			<div class="post">
+				<div class="post__header">
+					{{ page.title }}
+				</div>
+				<div class="post__date">
+					On {{ page.date.format('dddd, MMMM Do, YYYY') }}
+				</div>
+				<div class="post__text">
+					{{ page.content }}
+				</div>
+			</div>
+			<div class="share_container">
+				Share This Post
+				{% include 'includes/facebook-share.njk' %}
+				{% include 'includes/twitter-share.njk' %}
+				{% include 'includes/googleplus-share.njk' %}
+			
+			</div>
+		</div>
+		<div class=tag_list>
+			{% for category in page.categories.toArray() %}
+				<a class="link--reset tag"
+				href="{{ url_for('/categories/#' + post.category) }}">
+					{{ category.name }}
+				</a>
+			{% endfor %}
+		</div>
+		<div class="inline_share_container">
+			{% include 'includes/facebook-share.njk' %}
+			{% include 'includes/twitter-share.njk' %}
+			{% include 'includes/googleplus-share.njk' %}
+
+		</div>
+		{% include 'includes/footer.njk' %}
+	</div>
+</body>
+</html>

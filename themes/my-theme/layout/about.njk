@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% include 'includes/head.njk' %}
+</head>
+<body>
+    <div class="container">
+		{% include 'includes/appbar.njk' %}
+
+		<div class="author">
+			<div class="author__image">
+				<img src="{{ url_for('/images/me.jpg') }}">
+			</div>
+			<div class="author__description">
+				{{ page.content }}
+			</div>
+			{% include 'includes/contact.njk' %}
+		</div>
+		{% include 'includes/footer.njk' %}
+	</div>
+</body>
+</html>

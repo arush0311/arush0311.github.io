@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% include 'includes/head.njk' %}
+</head>
+<body>
+    <div class="container">
+		{% include 'includes/appbar.njk' %}
+		<div class="banner">
+			<div class="banner__content">
+				<div class="blog__title">
+					{{ config.title }}
+				</div>
+				<div class="blog_description">
+					{{ config.description }}
+				</div>
+				<a class="button button--hollow button--large link--reset" href='{{  url_for("/feed.xml") }}'>
+					Subscribe via RSS
+				</a>
+			</div>
+		</div>
+		<div class = "post_list">
+			{% for post in site.posts.toArray() %}
+				<a class="link--reset" href="{{ url_for(post.path) }}">
+					<div class="post">
+						<div>
+							<div class = "post__header">
+								{{ post.title }}
+							</div>
+							<div class = "post__date">
+								On {{ post.date.format('dddd, MMMM Do, YYYY') }}
+							</div>
+							<div class = "post__body">
+								{{ post.excerpt }}
+							</div>
+						</div>
+						{% for category in post.categories.toArray() %}
+							<a class="link--reset tag"
+							href="{{ url_for('/categories/#' + category.slug) }}">
+								{{ category.name }}
+							</a>
+						{% endfor %}
+					</div>
+				</a>
+			{% endfor %}
+		</div>
+		{% include 'includes/footer.njk' %}
+	</div>
+</body>
+</html>
