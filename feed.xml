@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>ARUSH GOYAL</title>
+    <link>https://arush0311.github.io/</link>
+    
+    <atom:link href="https://arush0311.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    
+    <description></description>
+    <pubDate>Sun, 11 Feb 2024 12:36:02 GMT</pubDate>
+    <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Same-origin on saperated frontend and backend</title>
+      <link>https://arush0311.github.io/same-origin-on-saperated-frontend-and-backend/</link>
+      <guid>https://arush0311.github.io/same-origin-on-saperated-frontend-and-backend/</guid>
+      <pubDate>Tue, 04 Jul 2017 18:30:00 GMT</pubDate>
+      
+      <description>&lt;p&gt;This is my 3rd week into the GSoC program under Mozilla and today I will write about how I achieved same-origin on &lt;a href=&quot;https://science.mozilla.org/&quot;&gt;science.mozilla.org&lt;/a&gt; and its api-server. &lt;/p&gt;</description>
+      
+      
+      
+      <content:encoded><![CDATA[<p>This is my 3rd week into the GSoC program under Mozilla and today I will write about how I achieved same-origin on <a href="https://science.mozilla.org/">science.mozilla.org</a> and its api-server. </p><span id="more"></span> <h1 id="Some-Background-Context"><a href="#Some-Background-Context" class="headerlink" title="Some Background Context"></a>Some Background Context</h1><p>I am doing GSoC project under Mozilla. As part of this project I have to implement a number of features on Mozilla Science website. The website frontend (written in react) runs on science.mozilla.org and talks to an api server (written in Django). So one of the features I was trying to implement was to implement authentication. These were the possible ways:</p><h2 id="Token-Based-Authentication"><a href="#Token-Based-Authentication" class="headerlink" title="Token Based Authentication"></a>Token Based Authentication</h2><p>An elegant method, which would have been ideal, except for the fact that the api server was also used to serve django’s admin interface and we wanted a single authentication for both admin and frontend. Since django used session authentication for admin we were left with session authentication.</p><h2 id="Session-Based-Authentication"><a href="#Session-Based-Authentication" class="headerlink" title="Session Based Authentication"></a>Session Based Authentication</h2><p>Session Authentication is a pain when authenticating across applications. The major problem is xsrf attack. If you haven’t heard of it, read about it in an excellent <a href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)">article</a> by OWASP. Go on, we will wait.</p><p>So normally how developers avoid the attack is by making sure that the client send a csrf token along with their request. The csrf token is normally stored in a browser cookie or inside HTML sent by server. Since an attacker cannot access these locations he cannot access the token.</p><p>But the same problem applied to us, since we could not have access to browser cookies (because the api-server runs on different domain).</p><p>Solution was to somehow bring client and server on same-origin, to make cookies set by server accessible to client.</p><p>We could do this in following ways:</p><h2 id="Integrate-Fontend-and-backend"><a href="#Integrate-Fontend-and-backend" class="headerlink" title="Integrate Fontend and backend"></a>Integrate Fontend and backend</h2><p>Very messy, as it would involve integrating two repositories and making sure react and django play nice with each other</p><h2 id="Use-a-proxy-server"><a href="#Use-a-proxy-server" class="headerlink" title="Use a proxy server"></a>Use a proxy server</h2><p>Setup something like a proxy-server which would route requests based on its request path. For example, <code>/api/*</code> requests would be routed to api-server and everything else to frontend server. One disadvantage was the proxy-server code would be saperate from frontend and backend and routing information would be split across three codebases.</p><p>So we integrated the the proxy-server code with our frontend code using <a href="https://www.npmjs.com/package/http-proxy-middleware">http-proxy-middleware</a>. Now all the requests would be directed to frontend-server and if its an <code>/api/</code> request it would be proxied to api server.</p><p>This approach was not perfect and still left something to be desired namely:</p><ul><li>The same routing info was in two repositories</li><li>Proxying adds some additional overhead to api requests</li></ul><p>But I think we can all live with that.</p>]]></content:encoded>
+      
+      
+      <category domain="https://arush0311.github.io/categories/gsoc/">gsoc</category>
+      
+      
+      
+      <comments>https://arush0311.github.io/same-origin-on-saperated-frontend-and-backend/#disqus_thread</comments>
+      
+    </item>
+    
+  </channel>
+</rss>
