@@ -21,10 +21,8 @@
 			</div>
 			<div class="share_container">
 				Share This Post
-				{% include 'includes/facebook-share.njk' %}
 				{% include 'includes/twitter-share.njk' %}
-				{% include 'includes/googleplus-share.njk' %}
-			
+				{% include 'includes/facebook-share.njk' %}
 			</div>
 		</div>
 		<div class=tag_list>
@@ -36,10 +34,8 @@
 			{% endfor %}
 		</div>
 		<div class="inline_share_container">
+		    {% include 'includes/twitter-share.njk' %}
 			{% include 'includes/facebook-share.njk' %}
-			{% include 'includes/twitter-share.njk' %}
-			{% include 'includes/googleplus-share.njk' %}
-
 		</div>
 		{% include 'includes/footer.njk' %}
 	</div>

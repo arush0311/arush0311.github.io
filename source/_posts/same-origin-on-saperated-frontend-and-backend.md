@@ -2,6 +2,7 @@
 layout: post
 title: "Same-origin on saperated frontend and backend"
 categories: gsoc
+date: 1499193000000
 ---
 This is my 3rd week into the GSoC program under Mozilla and today I will write about how I achieved same-origin on [science.mozilla.org](https://science.mozilla.org) and its api-server. 
 

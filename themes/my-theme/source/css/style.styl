@@ -1,0 +1,235 @@
+a 
+	text-decoration none
+	color #1c9963
+	&:hover 
+		opacity 0.8
+.link--reset 
+	color inherit
+	&:hover 
+		opacity 1
+p 
+	margin 10px 0px 10px 0px
+html 
+	font-size 10px
+body 
+	font-size 2rem
+	font-family 'Source Sans Pro', sans-serif
+	margin 0px
+	padding 0px
+	color #333
+	width 100%
+	box-sizing border-box
+pre, code 
+	border 1px solid #eee
+	border-radius 3px
+	background-color #eee
+code 
+	padding 1px 5px
+pre 
+	padding 8px 12px
+	overflow-x auto
+	& > code 
+		border 0
+		padding-right 0
+		padding-left 0
+figure 
+	margin 10px 5px
+.container 
+	min-height 100vh
+	position relative
+	padding-bottom 100px
+.appbar 
+	display flex
+	background-color #fff
+	width 100%
+	.logo 
+		font-family 'Bilbo', cursive
+		padding 13px 10px 10px 10px
+		font-size 2rem
+		margin-left 50px
+	.nav 
+		margin 0
+		display flex
+		padding 5px
+		margin-left auto
+		margin-right 50px
+		list-style none
+		color #555
+		font-size 1.5rem
+		margin-right 0px
+		.nav__item 
+			padding 10px
+			&:hover 
+				opacity 0.8
+.post_list 
+	padding 25px 0px 25px 0px
+	text-align center
+	max-width 740px
+	margin 0px auto 0px auto
+	font-size 1.8rem
+	.post 
+		display block
+		box-sizing border-box
+		padding 0px 20px 10px 20px
+		margin 15px 0px 5px 0px
+		border 2px #eee solid
+		border-radius 5px
+		&:hover 
+			border-color #ccc
+.post 
+	min-width 0
+	.post__header 
+		font-family 'Open Sans', sans-serif
+		color #5c6bc0
+		font-size 4rem
+		padding 15px 5px 0px 5px
+	.post__body 
+		text-align left
+	.post__date 
+		color #777
+		padding 0px 10px 0px 5px
+	.post__text 
+		font-size 2rem
+		line-height 1.5
+		word-wrap break-word
+		width 100%
+.footer 
+	box-sizing border-box
+	position absolute
+	font-size 1.5rem
+	bottom 0px
+	width 100%
+	text-align center
+	padding 10px
+	box-shadow rgba(0, 0, 0, 0.16) 0px 2px 2px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px
+.button 
+	border-radius 3px
+	text-align center
+	margin 3px
+	padding 7px 10px
+	box-shadow rgba(0, 0, 0, 0.16) 0px 2px 2px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px
+.button--hollow 
+	font-family 'Open Sans', sans-serif
+	border #fff solid 3px
+	background-color rgba(255, 255, 255, 0)
+	color #fff
+	&:hover 
+		background-color rgba(255, 255, 255, 0.1)
+.button--large 
+	display inline-block
+	padding 10px 20px 10px 20px
+	font-size 1.8rem
+	margin-top 30px
+.button--blue 
+	background-color #5c6bc0
+	color #fff
+.tag_list 
+	text-align center
+.tag 
+	display inline-block
+	font-size 1.4rem
+	padding 10px
+	background #eee
+	border-radius 3px
+	margin 5px
+	&:hover 
+		filter invert(100%)
+.post_container 
+	max-width 900px
+	padding 10px
+	margin 100px auto 20px auto
+	display flex
+.social_icon 
+	display inline-block
+	background-color #eee
+	height 50px
+	width 50px
+	border-radius 50%
+.share_container 
+	margin 30px 10px
+	text-align center
+	min-width 200px
+	.social_icon 
+		display block
+		margin 5px auto 5px auto
+.inline_share_container 
+	margin-top 30px
+	text-align center
+.author 
+	font-size 2rem
+	display flex
+	max-width 800px
+	margin 160px auto 10px auto
+	display block
+	margin-top 100px
+	margin-bottom 100px
+	text-align center
+	.author__image 
+		position relative
+		min-width 200px
+		min-height 200px
+		img 
+			display block
+			height 150px
+			width 150px
+			border-radius 50%
+			position absolute
+			top 50%
+			left 50%
+			transform translate(-50%, -50%)
+	.author__description 
+		padding 50px
+.contact 
+	text-align center
+	padding-top 25px
+	img 
+		display block
+		width 50px
+		height 50px
+		margin 10px
+		margin-right 20px
+		display inline
+		margin 5px
+@media screen and (max-device-width: 750px)
+	html
+		font-size: 9px;
+	.share_container
+		display: none;
+	.author
+		display: block;
+		margin-top: 100px;
+		margin-bottom: 100px;
+		text-align: center;
+	.contact img
+		display: inline;
+		margin: 5px;
+	.author__description
+		padding-left: 10px;
+		padding-right: 10px;
+@media screen and (max-device-width: 650px)
+	.appbar
+		.logo
+			margin-left: 0px;
+		.nav
+			margin-right: 0px;
+	.blog_description
+		display: none;
+@media screen and (max-device-width: 340px)
+	.appbar
+		.logo
+			display: none;
+		.nav
+			margin-left: auto;
+			margin-right: auto;
+.offset 
+		min-height 100px
+.blog_description 
+	display none
+.seek 
+	width 100%
+	&:before 
+		display block
+		content " "
+		margin-top -40px
+		height 40px
+		visibility hidden
