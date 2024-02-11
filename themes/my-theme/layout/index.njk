@@ -6,19 +6,6 @@
 <body>
     <div class="container">
 		{% include 'includes/appbar.njk' %}
-		<div class="banner">
-			<div class="banner__content">
-				<div class="blog__title">
-					{{ config.title }}
-				</div>
-				<div class="blog_description">
-					{{ config.description }}
-				</div>
-				<a class="button button--hollow button--large link--reset" href='{{  url_for("/feed.xml") }}'>
-					Subscribe via RSS
-				</a>
-			</div>
-		</div>
 		<div class = "post_list">
 			{% for post in site.posts.toArray() %}
 				<a class="link--reset" href="{{ url_for(post.path) }}">
