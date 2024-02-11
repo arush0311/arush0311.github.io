@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<head>
+	<title>Same-origin on saperated frontend and backend - ARUSH GOYAL</title>
+	<link href="https://fonts.googleapis.com/css?family=Bilbo|Open+Sans:300|Source+Sans+Pro:400,400i" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+	
+<link rel="stylesheet" href="/css/style.css">
+
+	
+	<!-- Google Analytics -->
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-101989834-1', 'auto');
+	  ga('send', 'pageview');
+	</script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+</head>
+<body>
+    <div class="container">
+		<div class="appbar">
+	<a class="link--reset" href="/"/>
+		<div class="logo">
+			ARUSH GOYAL
+		</div>
+	</a>
+	<ul class="nav">
+		<a class="link--reset" href="/categories">
+			<li class="nav__item button">
+				Categories
+			</li>
+		</a>
+		<a class="link--reset" href="/about">
+			<li class="nav__item button">
+				About me
+			</li>
+		</a>
+		<a class="link--reset" href="/feed.xml">
+			<li class="nav__item button button--blue">
+				Subscribe
+			</li>
+		</a>
+	</ul>
+</div>
+
+		<div class="post_container">
+			<div class="post">
+				<div class="post__header">
+					Same-origin on saperated frontend and backend
+				</div>
+				<div class="post__date">
+					On Wednesday, July 5th, 2017
+				</div>
+				<div class="post__text">
+					<p>This is my 3rd week into the GSoC program under Mozilla and today I will write about how I achieved same-origin on <a href="https://science.mozilla.org/">science.mozilla.org</a> and its api-server. </p>
+<span id="more"></span> 
+
+<h1 id="Some-Background-Context"><a href="#Some-Background-Context" class="headerlink" title="Some Background Context"></a>Some Background Context</h1><p>I am doing GSoC project under Mozilla. As part of this project I have to implement a number of features on Mozilla Science website. The website frontend (written in react) runs on science.mozilla.org and talks to an api server (written in Django). So one of the features I was trying to implement was to implement authentication. These were the possible ways:</p>
+<h2 id="Token-Based-Authentication"><a href="#Token-Based-Authentication" class="headerlink" title="Token Based Authentication"></a>Token Based Authentication</h2><p>An elegant method, which would have been ideal, except for the fact that the api server was also used to serve django’s admin interface and we wanted a single authentication for both admin and frontend. Since django used session authentication for admin we were left with session authentication.</p>
+<h2 id="Session-Based-Authentication"><a href="#Session-Based-Authentication" class="headerlink" title="Session Based Authentication"></a>Session Based Authentication</h2><p>Session Authentication is a pain when authenticating across applications. The major problem is xsrf attack. If you haven’t heard of it, read about it in an excellent <a href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)">article</a> by OWASP. Go on, we will wait.</p>
+<p>So normally how developers avoid the attack is by making sure that the client send a csrf token along with their request. The csrf token is normally stored in a browser cookie or inside HTML sent by server. Since an attacker cannot access these locations he cannot access the token.</p>
+<p>But the same problem applied to us, since we could not have access to browser cookies (because the api-server runs on different domain).</p>
+<p>Solution was to somehow bring client and server on same-origin, to make cookies set by server accessible to client.</p>
+<p>We could do this in following ways:</p>
+<h2 id="Integrate-Fontend-and-backend"><a href="#Integrate-Fontend-and-backend" class="headerlink" title="Integrate Fontend and backend"></a>Integrate Fontend and backend</h2><p>Very messy, as it would involve integrating two repositories and making sure react and django play nice with each other</p>
+<h2 id="Use-a-proxy-server"><a href="#Use-a-proxy-server" class="headerlink" title="Use a proxy server"></a>Use a proxy server</h2><p>Setup something like a proxy-server which would route requests based on its request path. For example, <code>/api/*</code> requests would be routed to api-server and everything else to frontend server. One disadvantage was the proxy-server code would be saperate from frontend and backend and routing information would be split across three codebases.</p>
+<p>So we integrated the the proxy-server code with our frontend code using <a href="https://www.npmjs.com/package/http-proxy-middleware">http-proxy-middleware</a>. Now all the requests would be directed to frontend-server and if its an <code>/api/</code> request it would be proxied to api server.</p>
+<p>This approach was not perfect and still left something to be desired namely:</p>
+<ul>
+<li>The same routing info was in two repositories</li>
+<li>Proxying adds some additional overhead to api requests</li>
+</ul>
+<p>But I think we can all live with that.</p>
+
+				</div>
+			</div>
+			<div class="share_container">
+				Share This Post
+				<a class="facebook-icon" href="https://www.facebook.com/sharer/sharer.php?u=https://arush0311.github.io/same-origin-on-saperated-frontend-and-backend/index.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" title="Share on Facebook">
+    <img src="/images/facebook.svg" class="social_icon">
+</a>
+
+				<a class="twitter-icon" href="https://twitter.com/intent/tweet?text=&quot;Same-origin on saperated frontend and backend&quot;%20https://arush0311.github.io/same-origin-on-saperated-frontend-and-backend/index.html%20via%20&#64;"
+    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" title="Share on Twitter">
+    <img src="/images/twitter.svg" class="social_icon">
+</a>
+			</div>
+		</div>
+		<div class=tag_list>
+			
+				<a class="link--reset tag"
+				href="/categories/#gsoc">
+					gsoc
+				</a>
+			
+		</div>
+		<div class="inline_share_container">
+			<a class="facebook-icon" href="https://www.facebook.com/sharer/sharer.php?u=https://arush0311.github.io/same-origin-on-saperated-frontend-and-backend/index.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" title="Share on Facebook">
+    <img src="/images/facebook.svg" class="social_icon">
+</a>
+
+			<a class="twitter-icon" href="https://twitter.com/intent/tweet?text=&quot;Same-origin on saperated frontend and backend&quot;%20https://arush0311.github.io/same-origin-on-saperated-frontend-and-backend/index.html%20via%20&#64;"
+    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" title="Share on Twitter">
+    <img src="/images/twitter.svg" class="social_icon">
+</a>
+		</div>
+		<div class="footer">
+	Copyright 2024 | Arush Goyal
+</div>
+	</div>
+</body>
+</html>
