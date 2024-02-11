@@ -66,13 +66,8 @@ figure {
 
 .appbar {
 	display: flex;
-	position: fixed;
-	top: 0;
-	left: 0;
 	background-color: #fff;
 	width: 100%;
-	box-shadow: rgba(0, 0, 0, 0.16) 0px 2px 2px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-	z-index: 999;
 
 	.logo {
 		font-family: 'Bilbo', cursive;
